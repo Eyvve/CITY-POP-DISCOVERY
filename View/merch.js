@@ -1,16 +1,18 @@
 
 var cart = []
+var displayCounter = 0
 
 if(localStorage.getItem('localDataCart')){
     console.log("welcome back")
 }else{
-    localStorage.setItem('localDataCart', JSON.stringify(cart));
+    localStorage.setItem('localDataCart', JSON.stringify(cart))
+    parseInt(localStorage.setItem('displaycounterlocal', JSON.stringify(displayCounter)));
 }
 
 
 
 var cartContent = JSON.parse(localStorage.getItem('localDataCart'))
-var displayCounterLocal = localStorage.getItem('displaycounterlocal')
+var displayCounterLocal = parseInt(localStorage.getItem('displaycounterlocal'))
 
 var submitB = document.getElementById("submitB")
 
@@ -45,7 +47,7 @@ var perso5 = 0
 var perso6 = 0
 
 var counter = -1
-var displayCounter = 0
+
 var limitCounter = 0
 
 var plus1 = document.getElementById("plus1")
@@ -63,7 +65,7 @@ totaldiv.innerHTML = totalprice
 initialUpdateDiv()
 
 b1.addEventListener("click", function(){
-    displayCounter += 1
+    displayCounterLocal += 1
     if (limitCounter < 100){
         if (perso1 < 1){
             var request = new XMLHttpRequest()
@@ -76,7 +78,7 @@ b1.addEventListener("click", function(){
                     "price" : data[0].price ,
                     "quantity" : 1
                 }
-                cart.push(transferedData)
+                cartContent.push(transferedData)
                 updatediv()
         }
         counter += 1
@@ -85,7 +87,7 @@ b1.addEventListener("click", function(){
         }else{
             var index1 = counterblock1
             console.log(index1)
-            cart[index1].quantity += 1
+            cartContent[index1].quantity += 1
             updatediv()
         }
         perso1 += 1
@@ -99,7 +101,7 @@ b1.addEventListener("click", function(){
 })
 
 b2.addEventListener("click", function(){
-    displayCounter += 1
+    displayCounterLocal += 1
     if (limitCounter < 100){
         if (perso2 < 1){
             var request = new XMLHttpRequest()
@@ -112,7 +114,7 @@ b2.addEventListener("click", function(){
                     "price" : data[1].price ,
                     "quantity" : 1
                 }
-                cart.push(transferedData)
+                cartContent.push(transferedData)
                 updatediv()
             }
             counter += 1
@@ -121,7 +123,7 @@ b2.addEventListener("click", function(){
         }else{
             var index2 = counterblock2
             console.log(index2)
-            cart[index2].quantity += 1
+            cartContent[index2].quantity += 1
             updatediv()
         }
         perso2 += 1
@@ -132,7 +134,7 @@ b2.addEventListener("click", function(){
 })
 
 b3.addEventListener("click", function(){
-    displayCounter += 1
+    displayCounterLocal += 1
     if (limitCounter < 100){
         if (perso3 < 1){
             var request = new XMLHttpRequest()
@@ -145,7 +147,7 @@ b3.addEventListener("click", function(){
                     "price" : data[2].price ,
                     "quantity" : 1
                 }
-                cart.push(transferedData)
+                cartContent.push(transferedData)
                 updatediv()
             }
             counter += 1
@@ -154,7 +156,7 @@ b3.addEventListener("click", function(){
         }else{
             var index3 = counterblock3
             console.log(index3)
-            cart[index3].quantity += 1
+            cartContent[index3].quantity += 1
             updatediv()
         }
         perso3 += 1
@@ -165,7 +167,7 @@ b3.addEventListener("click", function(){
 })
 
 b4.addEventListener("click", function(){
-    displayCounter += 1
+    displayCounterLocal += 1
     if (limitCounter < 100){
         if (perso4 < 1){
             var request = new XMLHttpRequest()
@@ -178,7 +180,7 @@ b4.addEventListener("click", function(){
                     "price" : data[3].price ,
                     "quantity" : 1
                 }
-                cart.push(transferedData)
+                cartContent.push(transferedData)
                 updatediv()
             }
             counter += 1
@@ -187,7 +189,7 @@ b4.addEventListener("click", function(){
         }else{
             var index4 = counterblock4
             console.log(index4)
-            cart[index4].quantity += 1
+            cartContent[index4].quantity += 1
             updatediv()
         }
         perso4 += 1
@@ -198,7 +200,7 @@ b4.addEventListener("click", function(){
 })
 
 b5.addEventListener("click", function(){
-    displayCounter += 1
+    displayCounterLocal += 1
     if (limitCounter < 100){
         if (perso5 < 1){
             var request = new XMLHttpRequest()
@@ -211,7 +213,7 @@ b5.addEventListener("click", function(){
                     "price" : data[4].price ,
                     "quantity" : 1
                 }
-                cart.push(transferedData)
+                cartContent.push(transferedData)
                 updatediv()
             }
             counter += 1
@@ -220,7 +222,7 @@ b5.addEventListener("click", function(){
         }else{
             var index5 = counterblock5
             console.log(index5)
-            cart[index5].quantity += 1
+            cartContent[index5].quantity += 1
             updatediv()
         }
         perso5 += 1
@@ -231,7 +233,7 @@ b5.addEventListener("click", function(){
 })
 
 b6.addEventListener("click", function(){
-    displayCounter += 1
+    displayCounterLocal += 1
     if (limitCounter < 100){
         if (perso6 < 1){
             var request = new XMLHttpRequest()
@@ -244,7 +246,7 @@ b6.addEventListener("click", function(){
                     "price" : data[5].price ,
                     "quantity" : 1
                 }
-                cart.push(transferedData)
+                cartContent.push(transferedData)
                 updatediv()
             }
             counter += 1
@@ -253,7 +255,7 @@ b6.addEventListener("click", function(){
         }else{
             var index6 = counterblock6
             console.log(index6)
-            cart[index6].quantity += 1
+            cartContent[index6].quantity += 1
             updatediv()
         }
         perso6 += 1
@@ -267,9 +269,9 @@ b6.addEventListener("click", function(){
 function plusButton(index){
     if(limitCounter < 100 ){
         limitCounter += 1
-        displayCounter += 1
+        displayCounterLocal += 1
         console.log("+1")
-        cart[index].quantity += 1
+        cartContent[index].quantity += 1
         updatediv()
     }else{
         alert("Your maximum of 100 items is reached")
@@ -277,21 +279,21 @@ function plusButton(index){
 }
 
 function minusButton(index){
-    if(cart[index].quantity > 1){
+    if(cartContent[index].quantity > 1){
         limitCounter -= 1
-        displayCounter -= 1
+        displayCounterLocal -= 1
         console.log("-1")
-        cart[index].quantity -= 1
+        cartContent[index].quantity -= 1
         updatediv()
     }
     
 }
 
 function removeItem(index){
-    limitCounter -= parseInt(cart[index].quantity)
-    displayCounter -= parseInt(cart[index].quantity)
-    cart[index].quantity = 0
-    cart.splice(index, 1)
+    limitCounter -= parseInt(cartContent[index].quantity)
+    displayCounterLocal -= parseInt(cartContent[index].quantity)
+    cartContent[index].quantity = 0
+    cartContent.splice(index, 1)
     counter -= 1
     if (index == "0"){
         perso1 = 0
@@ -315,17 +317,17 @@ function updatediv(){
     content2.innerHTML = ""
     content.innerHTML = ""
     var totallocal = 0
-    for(i = 0; i < cart.length; i++){
+    for(i = 0; i < cartContent.length; i++){
         console.log("hey")
         var htmlString = "" ;
         htmlString+= `
         <div id="product` + i + `" class="product">
-            <img class="cartImage" src=" ` + cart[i].image + `" alt="">
-            <div class="cartname">` + cart[i].name + `</div>
-            <div id="cartprice` + i + `" class="cartprice">` + "£" + cart[i].price + `</div>
+            <img class="cartImage" src=" ` + cartContent[i].image + `" alt="">
+            <div class="cartname">` + cartContent[i].name + `</div>
+            <div id="cartprice` + i + `" class="cartprice">` + "£" + cartContent[i].price + `</div>
             <div class="cartQuantity">
                 <img id="minus` + i + `" class="editbutton" src="./Assets/minus.svg" alt="" onclick="minusButton(` + i + `)">
-                <div class="personalcounter" id="personalcounter` + i + `">` + cart[i].quantity + `</div>
+                <div class="personalcounter" id="personalcounter` + i + `">` + cartContent[i].quantity + `</div>
                 <img id="plus` + i + `" class="editbutton" src="./Assets/plus.svg" alt="" onclick="plusButton(` + i + `)" >
             </div>
             <img id="carttrash` + i + `" class="carttrash" src="./Assets/trash.svg" onclick="removeItem(` + i + `)"></img>
@@ -334,12 +336,12 @@ function updatediv(){
         var htmlString2 = "" ;
         htmlString2+= `
         <div id="product` + i + `" class="product">
-            <img class="cartImage2" src=" ` + cart[i].image + `" alt="">
-            <div class="cartname2">` + cart[i].name + `</div>
-            <div id="cartprice` + i + `" class="cartprice">` + "£" + cart[i].price + `</div>
+            <img class="cartImage2" src=" ` + cartContent[i].image + `" alt="">
+            <div class="cartname2">` + cartContent[i].name + `</div>
+            <div id="cartprice` + i + `" class="cartprice">` + "£" + cartContent[i].price + `</div>
             <div class="cartQuantity">
                 <img id="minus` + i + `" class="editbutton" src="./Assets/black_minus.svg" alt="" onclick="minusButton(` + i + `)">
-                <div class="personalcounter2" id="personalcounter` + i + `">` + cart[i].quantity + `</div>
+                <div class="personalcounter2" id="personalcounter` + i + `">` + cartContent[i].quantity + `</div>
                 <img id="plus` + i + `" class="editbutton" src="./Assets/black_plus.svg" alt="" onclick="plusButton(` + i + `)" >
             </div>
             <img id="carttrash` + i + `" class="carttrash" src="./Assets/black_trash.svg" onclick="removeItem(` + i + `)"></img>
@@ -347,21 +349,21 @@ function updatediv(){
         `;
         content.insertAdjacentHTML("beforeend", htmlString)
         content2.insertAdjacentHTML("beforeend", htmlString2)
-        totallocal += parseInt(cart[i].price) * cart[i].quantity
+        totallocal += parseInt(cartContent[i].price) * cartContent[i].quantity
     }
 
     total.innerHTML = "Total = £ " + totallocal
 
     totaldiv.innerHTML = "Total = £ " + totallocal
 
-    var strcounter = String(displayCounter)
+    var strcounter = String(displayCounterLocal)
     var productCounter = html.style.setProperty("--counter","'" + strcounter +"'");
     console.log("counter = " + counter)
 
-    localStorage.setItem('localDataCart', JSON.stringify(cart));
+    localStorage.setItem('localDataCart', JSON.stringify(cartContent));
     localStorage.setItem('valid', true);
     localStorage.setItem('total', JSON.stringify(totallocal));
-    localStorage.setItem('displaycounterlocal', JSON.stringify(displayCounter));
+    parseInt(localStorage.setItem('displaycounterlocal', JSON.stringify(displayCounterLocal)));
 
 }
 

@@ -1,0 +1,39 @@
+/* GENERAL */
+
+body{
+    background-image: url("./Assets/BGs/bg7.png");
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    margin: 0;
+}
+
+/* MAIN */
+
+.txtabout{
+    position: relative;
+    margin: 0 auto;
+    margin-top: 8%;
+    height: auto;
+    width: 50vw;
+    background-color: rgba(21, 6, 6, 0.85);
+    border-radius: 5%;
+}
+
+.txt{
+    padding: 20px 40px 20px 40px;
+}
+
+
+.txt>*{
+    font-size: 1.7vh;
+    line-height: 3.5vh;
+}
+
+.txt>.smaller{
+    font-size: 1.5vh;
+}
+
+.center{
+    text-align: center;
+}
