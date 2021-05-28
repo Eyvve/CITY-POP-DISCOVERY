@@ -1,14 +1,14 @@
 main{
     height: auto;
     width: 100%;
-    background-image: url('./Assets/BGs/bg5.jpg') ;
+    background-image: url('./Assets/BGs/bg1.jpg') ;
     background-position: center;
     background-size: cover;
     background-attachment: fixed;
 }
 
 .bg1{
-    background-image: url('./Assets/BGs/bg4.png') ;
+    /* background-image: url('./Assets/BGs/bg4.png') ; */
     background-position: center;
     background-size: cover;
     background-attachment:fixed;
