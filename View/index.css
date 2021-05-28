@@ -72,8 +72,8 @@ footer{
 }
 
 @media (max-width: 1200px){
-    .transparentdiv>p{
-        font-size: 23px;
+    .txtlimits>p{
+        font-size: 30px;
         line-height: 3rem;
     }
 }
