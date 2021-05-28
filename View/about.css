@@ -37,3 +37,20 @@ body{
 .center{
     text-align: center;
 }
+
+@media (max-width: 1300px){
+    .txtabout{
+        position: relative;
+        margin: 0 auto;
+        margin-top: 20%;
+        height: auto;
+        width: 80vw;
+        background-color: rgba(21, 6, 6, 0.85);
+        border-radius: 25px;
+    }
+
+    .txt>*{
+        font-size: 25px;
+        line-height: 35px;
+    }
+}
