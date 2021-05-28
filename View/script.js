@@ -5,10 +5,10 @@ var transparentdiv = document.getElementById("transparentdiv")
 
 document.addEventListener("scroll", function(){
     console.log(scrollY)
-    if(scrollY > 1900){
+    if(scrollY > 4513){
         bg1.style.backgroundImage = "url('./Assets/BGs/bg4.png')"
     }
-    if(scrollY < 1900){
+    if(scrollY < 4513){
         bg1.style.backgroundImage = "url('./Assets/BGs/bg1.jpg')"
 
     }
