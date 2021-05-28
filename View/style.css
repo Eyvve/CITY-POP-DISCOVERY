@@ -1,0 +1,197 @@
+html{
+    font-family: 'Quattrocento Sans', sans-serif;
+    overflow-x: hidden;
+    height: auto;
+}
+
+p, h1, h2, h3{
+    letter-spacing: 0.28em;
+    color: white;
+}
+
+.mini{
+    font-size: 15px;
+} 
+
+a{
+    text-decoration: none;
+}
+
+a>*:hover{
+    color: #7546D9;
+    cursor: pointer;
+}
+
+p{
+    font-size: 18px;
+    line-height: 1.8rem;
+}
+
+body{
+    margin: 0;
+}
+
+nav{
+    position: fixed;
+    top: 20px;
+    width: 100%;
+    height: 100px;
+    display: grid;
+    grid-template-columns: 3fr auto 6fr auto 3fr;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+        "logo void links void2 basket";
+    align-content: center;
+    justify-content: center;
+    z-index: 400;
+}
+
+.logo { 
+    grid-area: logo; 
+    position: relative;
+    left: 100px;
+    width: 230px;
+}
+
+
+.void { 
+    grid-area: void;
+}
+
+
+.void2 { 
+    grid-area: void2;
+}
+
+
+.basket {    
+    grid-area: basket;
+    justify-self: center;
+    align-self: center;
+    padding-left: 115px;
+    cursor: pointer;
+}
+
+.linksBG{
+    position: relative;
+    top: 25px;
+    display: flex;
+    justify-content: space-evenly;
+    background-color: rgba(21, 6, 6, 0.85);
+    height: 60px;
+    width: 620px ;
+    border-radius: 15px;
+    margin: 0 auto;
+}
+
+
+.albums{
+    text-align: end;
+    align-self: center;
+}
+
+a{
+    text-decoration: none;
+}
+
+a>*:hover{
+    color: #7546D9;
+    cursor: pointer;
+}
+
+.albums:hover{
+    color: #7546D9;
+    cursor: pointer;
+}
+
+
+.merch{
+    text-align: center;
+    align-self: center;
+}
+
+.merch:hover{
+    color: #7546D9;
+    cursor: pointer;
+}
+
+
+.about{
+    text-align: start;
+    align-self: center;
+}
+
+.about:hover{
+    color: #7546D9;
+    cursor: pointer;
+}
+
+
+/* main{
+    position: relative;
+    margin: 0 auto;
+    width: 85%;
+} */
+
+/* FOOTER */
+
+
+
+footer{
+    position:absolute;
+    bottom:0;
+    width:100%;
+    padding-top:50px;
+    height:50px;
+}
+
+.footer{
+    position: relative;
+    bottom: 0px;
+    height: 50px;
+    width: 100%;
+    background-color: rgba(21, 6, 6, 0.85);
+    display: flex;
+    justify-content: start;
+    flex-direction: row;
+    z-index: 10000;
+}
+
+.footer>p{
+    font-size: 100%;
+    margin-left: 5%;
+}
+
+.footer>p>a{
+    color: inherit;
+}
+
+.footer>p>a:hover{
+    color: #7546D9;
+}
+
+
+@media (max-width: 1350px){
+    .logo { 
+        grid-area: logo; 
+        position: relative;
+        left: 20%;
+        top: 20px;
+        width: 80%;
+    }
+
+    .linksBG{
+        width: 420px;
+    }
+
+    .basket {    
+    grid-area: basket;
+    justify-self: start;
+    align-self: flex-start;
+    padding: 0;
+    margin: 0 !important;
+    }
+}
+
+

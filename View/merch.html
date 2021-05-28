@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="merchstyle.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Quattrocento+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <title>CITY POP DISCOVERY | Merch</title>
+</head>
+<body>
+    <header>
+        <nav class="topnavbar">
+            <a href="./Index.html"><img src="./Assets/logowstroke.svg" alt="" class="logo"></a>
+            <div class="void"></div>
+            <div class="linksBG">
+                <a href="./albums.html"><p class="albums">albums</p></a>
+                <a href="./merch.html"><p class="merch">merch</p></a>
+                <a href=""><p class="about">about</p></a>
+            </div>
+            <div class="void2"></div>
+            <div class="basket">
+                <img id="cartButton" src="./Assets/basket.svg"></img>
+            </div>
+            <div id="divcart" class="divcart">
+                <h3>Cart</h3>
+                <hr>
+                <div class="content" id="content"></div>
+                <p id="total"></p>
+                <button id="divCartButton">My cart</button>
+            </div>
+            
+        </nav>
+        
+        <!-- <div class="counternumber">1</div> -->
+        <!-- <div class="divcart" id="divcart"></div> -->
+    </header>
+    <main>
+        <img class="merch_title" src="./Assets/merch_title.png"></img>
+        <div class="merch-container" id="merch-container1">
+            <div class="carte">
+                <img src="./Assets/fake merch/t-shirt.jpg" alt="t-shirt" class="image">
+                <div class="name">Tee shirt</div>
+                <div class="price">£25</div>
+                <button class="buy" id="buy1"><p>Add to cart</p></button>
+            </div>
+            <div class="carte">
+                <img src="./Assets/fake merch/poster.png" alt="t-shirt" class="image">
+                <div class="name">Poster</div>
+                <div class="price">£50</div>
+                <button class="buy" id="buy2"><p>Add to cart</p></button>
+            </div>
+            <div class="carte">
+                <img src="./Assets/fake merch/sticker png.png" alt="t-shirt" class="image">
+                <div class="name">Sticker</div>
+                <div class="price">£5</div>
+                <button class="buy" id="buy3"><p>Add to cart</p></button>
+            </div>
+        </div>
+        <div class="merch-container" id="merch-container2">
+            <div class="carte">
+                <img src="./Assets/fake merch/coque rigide.jpg" alt="t-shirt" class="image">
+                <div class="name">Hard case</div>
+                <div class="price">£20</div>
+                <button class="buy" id="buy4"><p>Add to cart</p></button>
+            </div>
+            <div class="carte">
+                <img src="./Assets/fake merch/coque souple.jpg" alt="t-shirt" class="image">
+                <div class="name">Bumper case</div>
+                <div class="price">£20</div>
+                <button class="buy" id="buy5"><p>Add to cart</p></button>
+            </div>
+            <div class="carte">
+                <img src="./Assets/fake merch/badge.jpg" alt="t-shirt" class="image">
+                <div class="name">Badge</div>
+                <div class="price">£5</div>
+                <button class="buy" id="buy6"><p>Add to cart</p></button>
+            </div>
+        </div>
+        <div class="cartValidation" id="cartValidation">
+            <h3>My Cart</h3>
+            <img class="cross" id="cross" src="./Assets/cross.svg" alt="">
+            <!-- <div class="empty" id="empty">Your cart is empty</div> -->
+            <div class="content2" id="content2">
+            </div>
+            <p id="totaldiv"></p>
+            <button id="openform">Validate and pay</button>
+            <br>
+            <div class="pay" id="pay">
+                <form name="pay" class="payform">
+                    <label class="labFN" for="firstname">First name :</label>
+                    <input class="FN" type="text" name="firstname" id="firstname" required>
+                    <br>
+                    <label class="labLN" for="lastname">Last name :</label>
+                    <input class="LN" type="text" name="lastname" id="lastname" required>
+                    <br>
+                    <label class="labMail" for="email">Email :</label>
+                    <input class="Mail" type="email" name="email" id="email" required>
+                    <br>
+                    <label class="labAdr" for="address">Address :</label>
+                    <input class="Adr" type="text" name="address" id="address" required>
+
+                    <input type="button" class="submitB" id="submitB" value="pay">
+                </form>
+            </div>
+        </div>
+        <div id="thanksmessage" class="thanksmessage">
+            <p>Merci pour votre commande,<br><br> un mail vous sera envoyé sous peu accompagné d'un lien vers un tiers pour procéder au paiement.</p>
+            <br><button id="wipe">Revenir au site</button>
+        </div>
+    </main>
+    <footer>
+        <div class="footer">
+            <p>Created by <a href="https://www.doriancanonne.dev" target="_blank">Eyvve</a>,  w/ love | 2021</p>
+        </div>
+    </footer>
+    <script src="merch.js"></script>
+</body>
+</html>
