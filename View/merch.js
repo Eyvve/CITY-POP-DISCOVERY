@@ -8,20 +8,28 @@
 //  - possibilité de modifier les infos du localstorage
 //  - boutons pour augmenter ou diminuer les quantités
 //  - Bouton pour supprimer un élément du panier (seulement supprimer)
-//  - Limite d'articles à 9
+//  - Limite d'articles à 9 pour chaque
 //  - formulaire et envoi des informations du form + du panier a une adresse bidon en POST
 //  - Nettoyage du panier et refresh a la validation du message d'envoi de commande
 
 // Bugs :
 //  - Le panier bug a la suppression d'un élément : les index bougent en local mais l'algo ne suit pas
 //  ce qui provoque, tu le contateras par toi-même, un bordel / une modification des mauvais articles.
-//  j'aimerais tout corriger mais je n'ai malheureusement pas le temps, pourrais tu m'aider a corriger ce bug ?
+//  j'aimerais tout corriger mais je n'ai malheureusement pas le temps, pourrais-tu m'aider a corriger ce bug ?
 
 
 
 var cart = []
 var displayCounter = 0
 var counter = -1
+
+var request = new XMLHttpRequest()
+request.open("GET", "https://raw.githubusercontent.com/Eyvve/doriancanonne.dev/main/data/citypop_discovery.json")
+request.onload = function(){
+    var data = JSON.parse(request.responseText)
+    fetchContent(data)
+}
+request.send(); 
 
 if(localStorage.getItem('localDataCart')){
     // se déclanche si ce n'est pas la première connexion
@@ -86,10 +94,13 @@ const wipe = document.getElementById("wipe")
 
 var clicked = false
 
+var merchcontainer = document.getElementById("merchcontainer")
+
 var content = document.getElementById("content")
 var content2 = document.getElementById("content2")
 const cartValidation = document.getElementById("cartValidation")
 const divCartButton = document.getElementById("divCartButton")
+const cleanCart = document.getElementById("cleanCart")
 
 const cross = document.getElementById("cross")
 
@@ -107,7 +118,7 @@ initialUpdateDiv()
 
 // Fonctions au click de chaque bouton, je me suis rendu compte un peu trop tard que j'aurais pu optimiser ça
 
-b1.addEventListener("click", function(){
+function buy0(){
     displayCounterLocal += 1
     if (perso0 < 9){
         if (perso0 < 1){
@@ -145,9 +156,9 @@ b1.addEventListener("click", function(){
     }
     
     
-})
+}
 
-b2.addEventListener("click", function(){
+function buy1(){
     displayCounterLocal += 1
     if (perso1 < 9){
         if (perso1 < 1){
@@ -182,9 +193,9 @@ b2.addEventListener("click", function(){
     }else{
         alert("Your maximum of 9 items is reached")
     }
-})
+}
 
-b3.addEventListener("click", function(){
+function buy2(){
     displayCounterLocal += 1
     if (perso2 < 9){
         if (perso2 < 1){
@@ -219,9 +230,9 @@ b3.addEventListener("click", function(){
     }else{
         alert("Your maximum of 9 items is reached")
     }
-})
+}
 
-b4.addEventListener("click", function(){
+function buy3(){
     displayCounterLocal += 1
     if (perso3 < 9){
         if (perso3 < 1){
@@ -256,9 +267,9 @@ b4.addEventListener("click", function(){
     }else{
         alert("Your maximum of 9 items is reached")
     }
-})
+}
 
-b5.addEventListener("click", function(){
+function buy4(){
     displayCounterLocal += 1
     if (perso4 < 9){
         if (perso4 < 1){
@@ -293,9 +304,9 @@ b5.addEventListener("click", function(){
     }else{
         alert("Your maximum of 9 items is reached")
     }
-})
+}
 
-b6.addEventListener("click", function(){
+function buy5(){
     displayCounterLocal += 1
     if (perso5 < 9){
         if (perso5 < 1){
@@ -330,7 +341,7 @@ b6.addEventListener("click", function(){
     }else{
         alert("Your maximum of 9 items is reached")
     }
-})
+}
 
 
 // Fonction du bouton + du panier
@@ -410,6 +421,22 @@ function removeItem(index){
     updatediv()
 }
 
+function fetchContent(data){
+    merchcontainer.innerHTML = ""
+    for(i = 0; i < data.length; i++){
+        var htmlString = ""
+        htmlString+= `
+        <div class="carte">
+            <img src="` + data[i].image + `">
+            <div class="name">` + data[i].name + `</div>
+            <div class="price">` + "£" + data[i].price +  `</div>
+            <button class="buy" onclick="buy` + i + "()" + `"><p>Add to cart</p></button>
+        </div>
+        `;
+        merchcontainer.insertAdjacentHTML("beforeend", htmlString)
+    }
+}
+
 
 // Fonction de refresh, se déclanche a chaque intéraction et refresh tout le panier en mettant à jour ses infos
 
@@ -474,6 +501,11 @@ function updatediv(){
 
 }
 
+cleanCart.addEventListener("click", function(){
+    localStorage.clear()
+    document.location.reload()
+})
+
 // Fonction d'initialisation du panier, ne déclare pas de variables du localstorage
 
 function initialUpdateDiv(){
@@ -519,6 +551,13 @@ function initialUpdateDiv(){
     total.innerHTML = "Total = £ " + totallocal
 
     totaldiv.innerHTML = "Total = £ " + totallocal
+
+    parseInt(localStorage.setItem("perso0", perso0))
+    parseInt(localStorage.setItem("perso1", perso1))
+    parseInt(localStorage.setItem("perso2", perso2))
+    parseInt(localStorage.setItem("perso3", perso3))
+    parseInt(localStorage.setItem("perso4", perso4))
+    parseInt(localStorage.setItem("perso5", perso5))
 
     var strcounter
     if(localStorage.getItem('displaycounterlocal') == null){
