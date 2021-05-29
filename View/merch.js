@@ -1,18 +1,72 @@
+// Bonjour Damien,
+// Désolé mon code est un peu bordélique, j'ai réalisé trop tard que j'aurais du stocker bien plus 
+// de variables dans le json local pour éviter de créer 45000 variables du même genre, ça m'aurait aussi épargné pas mal de galères.
+
+// Features 100% fonctionnelles :
+//  - Sélection de produits et affichage dans le panier
+//  - Sauvegarde du panier dans le localstorage
+//  - possibilité de modifier les infos du localstorage
+//  - boutons pour augmenter ou diminuer les quantités
+//  - Bouton pour supprimer un élément du panier (seulement supprimer)
+//  - Limite d'articles à 9
+//  - formulaire et envoi des informations du form + du panier a une adresse bidon en POST
+//  - Nettoyage du panier et refresh a la validation du message d'envoi de commande
+
+// Bugs :
+//  - Le panier bug a la suppression d'un élément : les index bougent en local mais l'algo ne suit pas
+//  ce qui provoque, tu le contateras par toi-même, un bordel / une modification des mauvais articles.
+//  j'aimerais tout corriger mais je n'ai malheureusement pas le temps, pourrais tu m'aider a corriger ce bug ?
+
+
 
 var cart = []
 var displayCounter = 0
+var counter = -1
 
 if(localStorage.getItem('localDataCart')){
+    // se déclanche si ce n'est pas la première connexion
     console.log("welcome back")
+    perso0 = parseInt(localStorage.getItem("perso0"))
+    perso1 = parseInt(localStorage.getItem("perso1"))
+    perso2 = parseInt(localStorage.getItem("perso2"))
+    perso3 = parseInt(localStorage.getItem("perso3"))
+    perso4 = parseInt(localStorage.getItem("perso4"))
+    perso5 = parseInt(localStorage.getItem("perso5"))
+    counterblock1 = parseInt(localStorage.getItem("counterblock1"))
+    counterblock2 = parseInt(localStorage.getItem("counterblock2"))
+    counterblock3 = parseInt(localStorage.getItem("counterblock3"))
+    counterblock4 = parseInt(localStorage.getItem("counterblock4"))
+    counterblock5 = parseInt(localStorage.getItem("counterblock5"))
+    counterblock6 = parseInt(localStorage.getItem("counterblock6"))
+
 }else{
+    // initialisation de toutes les infos nécessaires au localstorage, se déclanche apres la seconde connexion
     localStorage.setItem('localDataCart', JSON.stringify(cart))
     parseInt(localStorage.setItem('displaycounterlocal', JSON.stringify(displayCounter)));
+    parseInt(localStorage.setItem('counterlocal', JSON.stringify(counter)));
+    var perso0 = 0
+    var perso1 = 0
+    var perso2 = 0
+    var perso3 = 0
+    var perso4 = 0
+    var perso5 = 0
+
+    var counterblock1
+    var counterblock2
+    var counterblock3
+    var counterblock4
+    var counterblock5
+    var counterblock6
 }
 
 
 
+// Initialisation des variables utilisées dans tous les cas
+
+
 var cartContent = JSON.parse(localStorage.getItem('localDataCart'))
 var displayCounterLocal = parseInt(localStorage.getItem('displaycounterlocal'))
+var counterlocal = parseInt(localStorage.getItem('counterlocal'))
 
 var submitB = document.getElementById("submitB")
 
@@ -39,22 +93,8 @@ const divCartButton = document.getElementById("divCartButton")
 
 const cross = document.getElementById("cross")
 
-var perso1 = 0
-var perso2 = 0
-var perso3 = 0
-var perso4 = 0
-var perso5 = 0
-var perso6 = 0
-
-var counter = -1
-
 var limitCounter = 0
-
 var plus1 = document.getElementById("plus1")
-
-var fees
-
-
 
 var totalprice = 0
 var total = document.getElementById("total")
@@ -62,12 +102,15 @@ var totaldiv = document.getElementById("totaldiv")
 total.innerHTML = totalprice
 totaldiv.innerHTML = totalprice
 
-initialUpdateDiv()
+// Se lance au lancement de la page et redistribue les infos du localstorage dans la page
+initialUpdateDiv() 
+
+// Fonctions au click de chaque bouton, je me suis rendu compte un peu trop tard que j'aurais pu optimiser ça
 
 b1.addEventListener("click", function(){
     displayCounterLocal += 1
-    if (limitCounter < 100){
-        if (perso1 < 1){
+    if (perso0 < 9){
+        if (perso0 < 1){
             var request = new XMLHttpRequest()
             request.open("GET", "https://raw.githubusercontent.com/Eyvve/doriancanonne.dev/main/data/citypop_discovery.json")
             request.onload = function(){
@@ -78,19 +121,23 @@ b1.addEventListener("click", function(){
                     "price" : data[0].price ,
                     "quantity" : 1
                 }
+                perso0 += 1
+                counterlocal += 1
+                counterblock1 = counterlocal
+                localStorage.setItem("counterblock1", counterblock1)
                 cartContent.push(transferedData)
                 updatediv()
         }
-        counter += 1
-        counterblock1 = counter
         request.send(); 
         }else{
-            var index1 = counterblock1
-            console.log(index1)
-            cartContent[index1].quantity += 1
-            updatediv()
+            if(cartContent[counterblock1].quantity < 9){
+                perso0 += 1
+                var index1 = counterblock1
+                console.log(index1)
+                cartContent[index1].quantity += 1
+                updatediv()
+            }
         }
-        perso1 += 1
         limitCounter +=1
         
     }else{
@@ -102,8 +149,8 @@ b1.addEventListener("click", function(){
 
 b2.addEventListener("click", function(){
     displayCounterLocal += 1
-    if (limitCounter < 100){
-        if (perso2 < 1){
+    if (perso1 < 9){
+        if (perso1 < 1){
             var request = new XMLHttpRequest()
             request.open("GET", "https://raw.githubusercontent.com/Eyvve/doriancanonne.dev/main/data/citypop_discovery.json")
             request.onload = function(){
@@ -114,29 +161,33 @@ b2.addEventListener("click", function(){
                     "price" : data[1].price ,
                     "quantity" : 1
                 }
+                perso1 += 1
+                counterlocal += 1
+                counterblock2 = counterlocal
+                localStorage.setItem("counterblock2", counterblock2)
                 cartContent.push(transferedData)
                 updatediv()
             }
-            counter += 1
-            counterblock2 = counter
             request.send(); 
         }else{
-            var index2 = counterblock2
-            console.log(index2)
-            cartContent[index2].quantity += 1
-            updatediv()
+            if(cartContent[counterblock2].quantity < 9){
+                perso1 += 1
+                var index2 = counterblock2
+                console.log(index2)
+                cartContent[index2].quantity += 1
+                updatediv()
+            }
         }
-        perso2 += 1
         limitCounter +=1
     }else{
-        alert("Your maximum of 100 items is reached")
+        alert("Your maximum of 9 items is reached")
     }
 })
 
 b3.addEventListener("click", function(){
     displayCounterLocal += 1
-    if (limitCounter < 100){
-        if (perso3 < 1){
+    if (perso2 < 9){
+        if (perso2 < 1){
             var request = new XMLHttpRequest()
             request.open("GET", "https://raw.githubusercontent.com/Eyvve/doriancanonne.dev/main/data/citypop_discovery.json")
             request.onload = function(){
@@ -147,29 +198,33 @@ b3.addEventListener("click", function(){
                     "price" : data[2].price ,
                     "quantity" : 1
                 }
+                perso2 += 1
+                counterlocal += 1
+                counterblock3 = counterlocal
+                localStorage.setItem("counterblock3", counterblock3)
                 cartContent.push(transferedData)
                 updatediv()
             }
-            counter += 1
-            counterblock3 = counter
             request.send(); 
         }else{
-            var index3 = counterblock3
-            console.log(index3)
-            cartContent[index3].quantity += 1
-            updatediv()
+            if(cartContent[counterblock3].quantity < 9){
+                perso2 += 1
+                var index3 = counterblock3
+                console.log(index3)
+                cartContent[index3].quantity += 1
+                updatediv()
+            }
         }
-        perso3 += 1
         limitCounter +=1
     }else{
-        alert("Your maximum of 100 items is reached")
+        alert("Your maximum of 9 items is reached")
     }
 })
 
 b4.addEventListener("click", function(){
     displayCounterLocal += 1
-    if (limitCounter < 100){
-        if (perso4 < 1){
+    if (perso3 < 9){
+        if (perso3 < 1){
             var request = new XMLHttpRequest()
             request.open("GET", "https://raw.githubusercontent.com/Eyvve/doriancanonne.dev/main/data/citypop_discovery.json")
             request.onload = function(){
@@ -180,29 +235,33 @@ b4.addEventListener("click", function(){
                     "price" : data[3].price ,
                     "quantity" : 1
                 }
+                perso3 += 1
+                counterlocal += 1
+                counterblock4 = counterlocal
+                localStorage.setItem("counterblock4", counterblock4)
                 cartContent.push(transferedData)
                 updatediv()
             }
-            counter += 1
-            counterblock4 = counter
             request.send(); 
         }else{
-            var index4 = counterblock4
-            console.log(index4)
-            cartContent[index4].quantity += 1
-            updatediv()
+            if(cartContent[counterblock4].quantity < 9){
+                perso3 += 1
+                var index4 = counterblock4
+                console.log(index4)
+                cartContent[index4].quantity += 1
+                updatediv()
+            }
         }
-        perso4 += 1
         limitCounter +=1
     }else{
-        alert("Your maximum of 100 items is reached")
+        alert("Your maximum of 9 items is reached")
     }
 })
 
 b5.addEventListener("click", function(){
     displayCounterLocal += 1
-    if (limitCounter < 100){
-        if (perso5 < 1){
+    if (perso4 < 9){
+        if (perso4 < 1){
             var request = new XMLHttpRequest()
             request.open("GET", "https://raw.githubusercontent.com/Eyvve/doriancanonne.dev/main/data/citypop_discovery.json")
             request.onload = function(){
@@ -213,29 +272,33 @@ b5.addEventListener("click", function(){
                     "price" : data[4].price ,
                     "quantity" : 1
                 }
+                perso4 += 1
+                counterlocal += 1
+                counterblock5 = counterlocal
+                localStorage.setItem("counterblock5", counterblock5)
                 cartContent.push(transferedData)
                 updatediv()
             }
-            counter += 1
-            counterblock5 = counter
             request.send(); 
         }else{
-            var index5 = counterblock5
-            console.log(index5)
-            cartContent[index5].quantity += 1
-            updatediv()
+            if(cartContent[counterblock5].quantity < 9){
+                perso4 += 1
+                var index5 = counterblock5
+                console.log(index5)
+                cartContent[index5].quantity += 1
+                updatediv()
+            }
         }
-        perso5 += 1
         limitCounter +=1
     }else{
-        alert("Your maximum of 100 items is reached")
+        alert("Your maximum of 9 items is reached")
     }
 })
 
 b6.addEventListener("click", function(){
     displayCounterLocal += 1
-    if (limitCounter < 100){
-        if (perso6 < 1){
+    if (perso5 < 9){
+        if (perso5 < 1){
             var request = new XMLHttpRequest()
             request.open("GET", "https://raw.githubusercontent.com/Eyvve/doriancanonne.dev/main/data/citypop_discovery.json")
             request.onload = function(){
@@ -246,37 +309,58 @@ b6.addEventListener("click", function(){
                     "price" : data[5].price ,
                     "quantity" : 1
                 }
+                perso5 += 1
+                counterlocal += 1
+                counterblock6 = counterlocal
+                localStorage.setItem("counterblock6", counterblock6)
                 cartContent.push(transferedData)
                 updatediv()
             }
-            counter += 1
-            counterblock6 = counter
             request.send(); 
         }else{
-            var index6 = counterblock6
-            console.log(index6)
-            cartContent[index6].quantity += 1
-            updatediv()
+            if(cartContent[counterblock6].quantity < 9){
+                perso5 += 1
+                var index6 = counterblock6
+                console.log(index6)
+                cartContent[index6].quantity += 1
+                updatediv()
+            }
         }
-        perso6 += 1
         limitCounter +=1
     }else{
-        alert("Your maximum of 100 items is reached")
+        alert("Your maximum of 9 items is reached")
     }
 })
 
 
+// Fonction du bouton + du panier
+
 function plusButton(index){
-    if(limitCounter < 100 ){
+    if(cartContent[index].quantity < 9 ){
         limitCounter += 1
         displayCounterLocal += 1
         console.log("+1")
         cartContent[index].quantity += 1
+        if (index == "0"){
+            perso0 += 1
+        }else if(index == "1"){
+            perso1 += 1
+        }else if(index == "2"){
+            perso2 += 1
+        }else if(index == "3"){
+            perso3 += 1
+        }else if(index == "4"){
+            perso4 += 1
+        }else if(index == "5"){
+            perso5 += 1
+        }
         updatediv()
     }else{
-        alert("Your maximum of 100 items is reached")
+        alert("Your maximum of 9 items is reached")
     }
 }
+
+// Fonction du bouton - du panier
 
 function minusButton(index){
     if(cartContent[index].quantity > 1){
@@ -284,33 +368,50 @@ function minusButton(index){
         displayCounterLocal -= 1
         console.log("-1")
         cartContent[index].quantity -= 1
+        if (index == "0"){
+            perso0 -= 1
+        }else if(index == "1"){
+            perso1 -= 1
+        }else if(index == "2"){
+            perso2 -= 1
+        }else if(index == "3"){
+            perso3 -= 1
+        }else if(index == "4"){
+            perso4 -= 1
+        }else if(index == "5"){
+            perso5 -= 1
+        }
         updatediv()
     }
     
 }
+
+// Fonction de suppression d'un élément du panier
 
 function removeItem(index){
     limitCounter -= parseInt(cartContent[index].quantity)
     displayCounterLocal -= parseInt(cartContent[index].quantity)
     cartContent[index].quantity = 0
     cartContent.splice(index, 1)
-    counter -= 1
+    counterlocal -= 1
     if (index == "0"){
-        perso1 = 0
+        perso0 = 0
     }else if(index == "1"){
-        perso2 = 0
+        perso1 = 0
     }else if(index == "2"){
-        perso3 = 0
+        perso2 = 0
     }else if(index == "3"){
-        perso4 = 0
+        perso3 = 0
     }else if(index == "4"){
-        perso5 = 0
+        perso4 = 0
     }else if(index == "5"){
-        perso6 = 0
+        perso5 = 0
     }
     updatediv()
 }
 
+
+// Fonction de refresh, se déclanche a chaque intéraction et refresh tout le panier en mettant à jour ses infos
 
 function updatediv(){
     
@@ -358,15 +459,22 @@ function updatediv(){
 
     var strcounter = String(displayCounterLocal)
     var productCounter = html.style.setProperty("--counter","'" + strcounter +"'");
-    console.log("counter = " + counter)
+    console.log("counter = " + counterlocal)
 
     localStorage.setItem('localDataCart', JSON.stringify(cartContent));
     localStorage.setItem('valid', true);
     localStorage.setItem('total', JSON.stringify(totallocal));
     parseInt(localStorage.setItem('displaycounterlocal', JSON.stringify(displayCounterLocal)));
+    parseInt(localStorage.setItem("perso0", perso0))
+    parseInt(localStorage.setItem("perso1", perso1))
+    parseInt(localStorage.setItem("perso2", perso2))
+    parseInt(localStorage.setItem("perso3", perso3))
+    parseInt(localStorage.setItem("perso4", perso4))
+    parseInt(localStorage.setItem("perso5", perso5))
 
 }
 
+// Fonction d'initialisation du panier, ne déclare pas de variables du localstorage
 
 function initialUpdateDiv(){
     content2.innerHTML = ""
@@ -421,7 +529,7 @@ function initialUpdateDiv(){
     }
 
     var productCounter = html.style.setProperty("--counter","'" + strcounter +"'");
-    console.log("counter = " + counter)
+    console.log("counter = " + counterlocal)
 
 }
 
@@ -434,6 +542,7 @@ function initialUpdateDiv(){
 
 // ANIMATION DE DIV PANIER
 
+// déclanchement d'animations et d'interactions visuelles
 
 const cartButton = document.getElementById("cartButton")
 
@@ -452,6 +561,8 @@ cartButton.addEventListener("click", function(){
     }
 })
 
+// fait changer la croix du panier final
+
 cross.addEventListener("mouseenter", function(){
     cross.src = "./Assets/redCross.svg"
 })
@@ -464,6 +575,9 @@ cross.addEventListener("click", function(){
     cartValidation.style.display = "none"
 })
 
+
+// Ces fonctions ont pour but de faire apparaitre la div de form
+
 divCartButton.addEventListener("click", function(){
     cartValidation.style.display = "block"
     divcart.style.display = "none"
@@ -474,9 +588,14 @@ openform.addEventListener("click", function(){
     openform.style.display = "none"
 })
 
+
+// Fonction de récupération et d'envoi des informations du form et du panier a un 
+// tiers pour qu'il lui envoie (fictionnellement) un mail avec un récap de la commande 
+// et un bouton qui le redirige vers un site tiers pour le paiement
+
 submitB.addEventListener("click", function(){
     var request = new XMLHttpRequest()
-    request.open("POST", "https://raw.githubusercontent.com/Eyvve/doriancanonne.dev/main/data/citypop_discovery.json")
+    request.open("POST", "https://recuperationdecommande.json")
     request.onload = function(){
         var order = {
             'firstname' : document.pay.firstname.value,
