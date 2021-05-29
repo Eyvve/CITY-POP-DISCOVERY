@@ -570,7 +570,7 @@ function initialUpdateDiv(){
     }
 
     var productCounter = html.style.setProperty("--counter","'" + strcounter +"'");
-    console.log("counter = " + counterlocal)
+    console.log("counter = " + productCounter)
 
 }
 
