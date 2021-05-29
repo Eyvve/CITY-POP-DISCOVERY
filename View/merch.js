@@ -19,9 +19,7 @@
 
 
 
-var cart = []
-var displayCounter = 0
-var counter = -1
+
 
 var request = new XMLHttpRequest()
 request.open("GET", "https://raw.githubusercontent.com/Eyvve/doriancanonne.dev/main/data/citypop_discovery.json")
@@ -30,6 +28,10 @@ request.onload = function(){
     fetchContent(data)
 }
 request.send(); 
+
+var cart = []
+var displayCounter = 0
+var counter = parseInt(-1)
 
 if(localStorage.getItem('localDataCart')){
     // se déclanche si ce n'est pas la première connexion
