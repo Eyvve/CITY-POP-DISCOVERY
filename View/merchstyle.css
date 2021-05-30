@@ -416,7 +416,7 @@ footer{
 
 
 
-@media (min-width: 650px) and (max-width: 1500px){
+@media (max-width: 1500px){
     .merch-container{
         row-gap: 80px;
     }
