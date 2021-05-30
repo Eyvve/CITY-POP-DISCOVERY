@@ -429,7 +429,7 @@ function fetchContent(data){
         var htmlString = ""
         htmlString+= `
         <div class="carte">
-            <img src="` + data[i].image + `">
+            <img class="image" src="` + data[i].image + `">
             <div class="name">` + data[i].name + `</div>
             <div class="price">` + "£" + data[i].price +  `</div>
             <button class="buy" onclick="buy` + i + "()" + `"><p>Add to cart</p></button>
@@ -570,7 +570,7 @@ function initialUpdateDiv(){
     }
 
     var productCounter = html.style.setProperty("--counter","'" + strcounter +"'");
-    console.log("counter = " + productCounter)
+    console.log("counter = " + counterlocal)
 
 }
 

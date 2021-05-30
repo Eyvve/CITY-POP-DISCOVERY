@@ -188,7 +188,7 @@ body{
 .carte{
     display: flex;
     height: 380px;
-    max-width: 250px;
+    width: 250px;
     background-color: rgba(0, 0, 0, 0.8);
     /* flex-wrap: wrap; */
     flex-direction: column;
@@ -198,7 +198,7 @@ body{
 }
 
 .image{
-    width: 200px;
+    width: 240px;
     position: relative;
     margin: 0 auto;
 }
@@ -414,14 +414,11 @@ footer{
     height:50px;
 }
 
-@media (max-width: 1500px){
-    /* .merch-container{
-        flex-direction: column ;
-        row-gap: 40px;
-    } */
 
-    .carte{
-        align-self: center;
+
+@media (min-width: 650px) and (max-width: 1500px){
+    .merch-container{
+        row-gap: 80px;
     }
 
     .divcart>button{
